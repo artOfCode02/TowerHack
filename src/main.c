@@ -2,6 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct Room{
+  int xPosition;
+  int yPosition;
+
+  int height;
+  int width;
+
+  // Monster ** monsters;
+  // Item ** items;
+} Room;
+
 typedef struct Player{
   int xPosition;
   int yPosition;
@@ -49,12 +60,12 @@ int screenSetUp(){
 
 int mapSetUp(){
   mvprintw(13, 13, "#-^------------------------------------------#");
-  mvprintw(14, 13, "#.=..........................................#");
+  mvprintw(14, 13, "#.=...=.......................=..............#");
   mvprintw(15, 13, "#-----=.......................=--------------#");
-  mvprintw(16, 13, "#....=........................=..............#");
-  mvprintw(17, 13, "#....=........................=..............#");
-  mvprintw(18, 13, "#....=.................--=-----..............#");
-  mvprintw(19, 13, "#....=...................=...................#");
+  mvprintw(16, 13, "#.....=.......................=..............#");
+  mvprintw(17, 13, "#.....=..................=....=..............#");
+  mvprintw(18, 13, "#.....=................--=-----..............#");
+  mvprintw(19, 13, "#.....=...........=......=...................#");
   mvprintw(20, 13, "#-----------------=......=...................#");
   mvprintw(21, 13, "#.................=......=...................#");
   mvprintw(22, 13, "#.................=......=...................#");
@@ -128,13 +139,25 @@ int handleInput(char input, Player * user){
   checkPosition(newY, newX, user);
 }
 
+/* Collision detection */
 int checkPosition(int newY, int newX, Player * user){
-  
+  int space;
+  switch (mvinch(newY, newX)) {
+    case '.':
+      playerMove(user -> yPosition, newX, user);
+      break;
+    default:
+      break;
+  }
 }
 
 int playerMove(int y, int x, Player * user){
+  if (mvinch(user -> yPosition, user -> xPosition) == "=") {
+    mvprintw(user -> yPosition, user -> xPosition, "=");
+  } else {
   mvprintw(user -> yPosition, user -> xPosition, ".");
-  
+  }
+
   user -> yPosition = y;
   user -> xPosition = x;
   
