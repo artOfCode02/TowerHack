@@ -1,4 +1,4 @@
-#!bin/zsh
+#!/bin/zsh
 
 echo "Compiling..."
 gcc src/*.c -lncurses
