@@ -1,11 +1,10 @@
 #!/bin/zsh
 
 echo "Compiling..."
-gcc src/*.c -lncurses
-touch TowerHack
-gcc *.o -o TowerHack
+gcc -c src/*.c
+gcc *.o -o TowerHack -lncurses
 
-echo "Want to play? (y/n)"
+echo "Run program? (y/n)"
 read user
 
 if [[ user -eq "y" ]]; then
