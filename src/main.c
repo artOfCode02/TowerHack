@@ -78,7 +78,7 @@ Player * playerSetUp(){
   
   newPlayer -> health = 20;
   
-  playerMove(22, 14, newPlayer);
+  playerMove(10, 14, newPlayer);
   
   return newPlayer;
 }
