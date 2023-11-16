@@ -13,6 +13,7 @@ const int levelHeight = 40;
 int createLevel();
 
 typedef struct Level{
+  int number;
   int type;
   // Item ** items;
   // Monster ** monsters;
