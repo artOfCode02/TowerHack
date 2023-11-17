@@ -1,3 +1,5 @@
+#pragma once
+
 #define PLAYER '@'
 #define TOWER_WALL '#'
 #define EMPTY '.'
