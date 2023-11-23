@@ -9,6 +9,7 @@ As of now, there is no Windows support, we will add this later after development
 ## About
 
 TowerHack is a rougelike game where you climb the Cursed Tower to get the fabled Book of Gods.
+This rougelike is spell based, and it has vertical gameplay (no jumping though).
 
 ## Build
 
