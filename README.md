@@ -24,6 +24,7 @@ cd TowerHack
 ./build.sh
 ```
 
+
 If you want to compile manually, run:
 ```shell
 gcc -c src/*.c
