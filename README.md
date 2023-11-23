@@ -1,7 +1,47 @@
 # TowerHack
 
+## Disclaimer
+
+This project is a work-in-progress for now, so don't expect the game to even be remotely complete.
+
 ## About
 
-TowerHack is a rougelike game where you climb the Cursed Tower to get the fabled Spellbook of Gods.
+TowerHack is a rougelike game where you climb the Cursed Tower to get the fabled Book of Gods.
 
-This is a WIP, so the game will not work.
+## Build
+
+To build you must:
+1. Clone this repo
+```shell
+git clone https://github.com/artOfCode02/TowerHack/TowerHack.git/
+```
+3. Go to the directory where you cloned to.
+```shell
+cd TowerHack
+```
+4. Run automatic build in your terminal.
+```shell
+./build.sh
+```
+
+If you want to compile manually, run:
+```shell
+gcc -c src/*.c
+gcc *.o -o TowerHack -lncurses
+```
+
+To run program, while in TowerHack directory, run:
+```shell
+./build.sh
+```
+
+## Contribute
+
+To contribute to this repository, you must:
+1. Fork this repo
+2. Make new branch
+3. Commit to main branch
+4. Open up a pull request and wait for changes to be accepted.
+
+## Closing
+Have fun developing (or playing)!
