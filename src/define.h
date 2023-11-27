@@ -6,3 +6,4 @@
 #define FLOOR '-'
 #define WALL '|'
 #define LADDER '='
+#define STAIRS '^'
