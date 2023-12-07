@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <ncurses.h>
 
-#include "define.h"
-
 /* Player "class" */
 typedef struct Player {
   int xPosition;
@@ -27,16 +25,16 @@ Player * playerSetUp() {
 
 /* Move player */
 int playerMove(int y, int x, Player * user) {
-  if (mvinch(user -> yPosition, user -> xPosition) == LADDER) {
-    mvprintw(user -> yPosition, user -> xPosition, LADDER);
+  if (mvinch(user -> yPosition, user -> xPosition) == '=') {
+    mvprintw(user -> yPosition, user -> xPosition, "=");
   } else {
-    mvprintw(user -> yPosition, user -> xPosition, EMPTY);
+    mvprintw(user -> yPosition, user -> xPosition, ".");
   }
 
   user -> yPosition = y;
   user -> xPosition = x;
   
-  mvprintw(user -> yPosition, user -> xPosition, PLAYER);
+  mvprintw(user -> yPosition, user -> xPosition, "@");
   move(user -> yPosition, user -> xPosition);
   
   return 0;

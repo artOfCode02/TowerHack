@@ -1,4 +1,5 @@
 #!/bin/bash
+rm *.o
 
 echo "Compiling..."
 gcc -c src/*.c

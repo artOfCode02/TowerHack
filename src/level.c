@@ -3,10 +3,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "define.h"
-
-int drawRoom(Room * room);
-
 typedef struct Room{
   int xPosition;
   int yPosition;
@@ -15,6 +11,8 @@ typedef struct Room{
   //Item ** items;
   
 } Room;
+
+int drawRoom(Room ** roomArray);
 
 Room * createRoom(int y, int x);
 
@@ -25,15 +23,15 @@ int drawRoom(Room ** roomArray) {
     int x;
     int y;
 
-    for(x = roomArray[i] -> xPosition;
-    x < roomArray[i] -> xPosition + 10;
-    x++
+    for(y = roomArray[i] -> yPosition;
+    y < roomArray[i] -> yPosition + 10;
+    y++
     ) {
       //Top
-      mvprintw(roomArray[i] -> yPosition, x, FLOOR);
+      mvprintw(y, roomArray[i] -> xPosition, "|");
       
       //Bottom
-      mvprintw(roomArray[i] -> yPosition + 10, x, FLOOR);
+      mvprintw(y, roomArray[i] -> xPosition, "|");
     }
   }
 

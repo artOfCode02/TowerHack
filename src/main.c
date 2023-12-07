@@ -5,14 +5,12 @@
 #include "level.c"
 #include "player.c"
 
-#include "define.h"
-
 int screenSetUp();
 
 int handleInput(char input, Player * user);
 int checkPosition(int newY, int newX, Player * user);
 
-int main(){
+int main(int argc, char * argv[]){
   Player * user;
   
   screenSetUp();
@@ -35,7 +33,6 @@ int main(){
 
 int screenSetUp(){
   initscr();
-  printw("Hello Screen!");
   noecho();
   refresh();
   
@@ -87,7 +84,7 @@ int handleInput(char input, Player * user){
 int checkPosition(int newY, int newX, Player * user){
   int space;
   switch (mvinch(newY, newX)) {
-    case EMPTY:
+    case '.':
       playerMove(user -> yPosition, newX, user);
       break;
     default:
