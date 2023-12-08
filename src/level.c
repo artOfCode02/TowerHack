@@ -18,22 +18,19 @@ Room * createRoom(int y, int x);
 
 Room ** mapSetUp();
 
-int drawRoom(Room ** roomArray) {
-  for(int i = 0; i < 9; i++){
-    int x;
-    int y;
+int drawRoom(Room * room) {
+  int x = room -> xPosition;
+  int y = room -> yPosition;
+  
+  /*Top*/
+  mvprintw(y, x, "|--------|");
 
-    for(y = roomArray[i] -> yPosition;
-    y < roomArray[i] -> yPosition + 10;
-    y++
-    ) {
-      //Top
-      mvprintw(y, roomArray[i] -> xPosition, "|");
-      
-      //Bottom
-      mvprintw(y, roomArray[i] -> xPosition, "|");
-    }
+  for(int i = 1; i < 10; i++) {
+    mvprintw(y + i, x, "|.........|");
   }
+
+  /*Bottom*/
+  mvprintw(y + 10, x, "|---------|");
 
   return 0;
 }
@@ -44,6 +41,8 @@ Room * createRoom(int y, int x) {
 
   newRoom -> yPosition = y;
   newRoom -> xPosition = x;
+
+  drawRoom(newRoom)
 
   return newRoom;
 }
@@ -68,7 +67,5 @@ Room ** mapSetUp() {
   level[7] = createRoom(21, 10);
   level[8] = createRoom(21, 20);
  
-  drawRoom(level);
-
   return level;
 }
