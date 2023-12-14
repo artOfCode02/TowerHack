@@ -43,7 +43,7 @@ To run program, while in TowerHack directory, run:
 
 To contribute to this repository, you must:
 1. Fork this repo
-2. Make new branch
+2. Make main branch
 3. Commit to main branch
 4. Open up a pull request and wait for changes to be accepted.
 
