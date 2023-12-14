@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "level.c"
-#include "player.c"
+#include "level.h"
+#include "player.h"
 
 int screenSetUp();
 

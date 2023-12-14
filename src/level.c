@@ -1,29 +1,14 @@
 #include <ncurses.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
-typedef struct Room{
-  int xPosition;
-  int yPosition;
-
-  //Monster ** monsters;
-  //Item ** items;
-  
-} Room;
-
-int drawRoom(Room ** roomArray);
-
-Room * createRoom(int y, int x);
-
-Room ** mapSetUp();
+#include "level.h"
 
 int drawRoom(Room * room) {
   int x = room -> xPosition;
   int y = room -> yPosition;
   
   /*Top*/
-  mvprintw(y, x, "|--------|");
+  mvprintw(y, x, "|---------|");
 
   for(int i = 1; i < 10; i++) {
     mvprintw(y + i, x, "|.........|");
@@ -42,7 +27,7 @@ Room * createRoom(int y, int x) {
   newRoom -> yPosition = y;
   newRoom -> xPosition = x;
 
-  drawRoom(newRoom)
+  drawRoom(newRoom);
 
   return newRoom;
 }

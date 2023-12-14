@@ -2,7 +2,7 @@
 rm *.o
 
 echo "Compiling..."
-gcc -c src/*.c
+gcc -c src/*.c -I include
 gcc *.o -o TowerHack -lncurses
 
 echo "Run program? (1/0)"
