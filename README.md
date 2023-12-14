@@ -28,9 +28,9 @@ cd TowerHack
 ```
 
 
-If you want to compile manually, run:
+If you want to compile manually, run this from top directory:
 ```shell
-gcc -c src/*.c
+gcc -c src/*.c -I include
 gcc *.o -o TowerHack -lncurses
 ```
 
