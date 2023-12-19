@@ -12,12 +12,14 @@ int checkPosition(int newY, int newX, Player * user);
 
 int main(int argc, char * argv[]){
   Player * user;
+  Room ** map;
   
   screenSetUp();
-  mapSetUp();
+  map = mapSetUp();
   
   user = playerSetUp();
-  
+  playerStartPos(map, user);
+
   char ch = getch();
   
   /* Main Game Loop */
