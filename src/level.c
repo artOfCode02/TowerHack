@@ -4,8 +4,8 @@
 #include "level.h"
 
 int drawRoom(Room * room) {
-  int x = room -> xPosition;
-  int y = room -> yPosition;
+  int x = room -> position.x;
+  int y = room -> position.y;
   
   /*Top*/
   mvprintw(y, x, "|---------|");
@@ -24,8 +24,8 @@ Room * createRoom(int y, int x) {
   Room * newRoom;
   newRoom = malloc(sizeof(Room));
 
-  newRoom -> yPosition = y;
-  newRoom -> xPosition = x;
+  newRoom -> position.y = y;
+  newRoom -> position.x = x;
 
   drawRoom(newRoom);
 

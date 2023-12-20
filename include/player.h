@@ -1,12 +1,13 @@
 #pragma once
 
 #include "level.h"
+#include "position.h"
 
 /* Player "class" */
 typedef struct Player {
-  int xPosition;
-  int yPosition;
+  Position position;
   int health;
+
   Room * startRoom;
 } Player;
 
@@ -14,4 +15,4 @@ typedef struct Player {
 Player * playerSetUp();
 int playerMove(int y, int x, Player * user);
 int playerStartPos(Room ** level, Player * user);
-
+int playerMoveStart(Player * user);

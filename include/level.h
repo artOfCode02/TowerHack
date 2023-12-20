@@ -1,8 +1,9 @@
 #pragma once
 
+#include "position.h"
+
 typedef struct Room{
-  int xPosition;
-  int yPosition;
+  Position position;
 
   //Monster ** monsters;
   //Item ** items;
@@ -11,7 +12,5 @@ typedef struct Room{
 
 
 int drawRoom(Room * roomArray);
-
 Room * createRoom(int y, int x);
-
 Room ** mapSetUp();

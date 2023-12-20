@@ -18,17 +18,17 @@ Player * playerSetUp() {
 
 /* Move player */
 int playerMove(int y, int x, Player * user) {
-  if (mvinch(user -> yPosition, user -> xPosition) == '=') {
-    mvprintw(user -> yPosition, user -> xPosition, "=");
+  if (mvinch(user -> position.y, user -> position.x) == '=') {
+    mvprintw(user -> position.y, user -> position.x, "=");
   } else {
-    mvprintw(user -> yPosition, user -> xPosition, ".");
+    mvprintw(user -> position.y, user -> position.x, ".");
   }
 
-  user -> yPosition = y;
-  user -> xPosition = x;
+  user -> position.y = y;
+  user -> position.x = x;
   
-  mvprintw(user -> yPosition, user -> xPosition, "@");
-  move(user -> yPosition, user -> xPosition);
+  mvprintw(user -> position.y, user -> position.x, "@");
+  move(user -> position.y, user -> position.x);
   
   return 0;
 }
@@ -40,4 +40,7 @@ int playerStartPos(Room ** level, Player * user) {
   roomNumber = (rand() % 3) + 6;
 
   user -> startRoom = level[roomNumber];
+
+  return 0;
 }
+

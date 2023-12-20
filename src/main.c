@@ -50,29 +50,29 @@ int handleInput(char input, Player * user){
     // Left
     case 'H':
     case 'h':
-      newY = user -> yPosition;
-      newX = user -> xPosition - 1;
+      newY = user -> position.y;
+      newX = user -> position.x - 1;
       break;
     
     // Down
     case 'j':
     case 'J':
-      newY = user -> yPosition + 1;
-      newX = user -> xPosition;
+      newY = user -> position.y + 1;
+      newX = user -> position.x;
       break;
     
     // Up
     case 'k':
     case 'K':
-      newY = user -> yPosition - 1;
-      newX = user -> xPosition;
+      newY = user -> position.y - 1;
+      newX = user -> position.x;
       break;
     
     // Right
     case 'l':
     case 'L':
-      newY = user -> yPosition;
-      newX = user -> xPosition + 1;
+      newY = user -> position.y;
+      newX = user -> position.x + 1;
       break;
     
     default:
@@ -87,7 +87,7 @@ int checkPosition(int newY, int newX, Player * user){
   int space;
   switch (mvinch(newY, newX)) {
     case '.':
-      playerMove(user -> yPosition, newX, user);
+      playerMove(user -> position.y, newX, user);
       break;
     default:
       break;
