@@ -19,6 +19,7 @@ int main(int argc, char * argv[]){
   
   user = playerSetUp();
   playerStartPos(map, user);
+  playerMoveStart(user);
 
   char ch = getch();
   
@@ -92,4 +93,6 @@ int checkPosition(int newY, int newX, Player * user){
     default:
       break;
   }
+
+  move(user -> position.y, user -> position.x);
 }

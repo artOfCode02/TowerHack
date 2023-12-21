@@ -18,11 +18,7 @@ Player * playerSetUp() {
 
 /* Move player */
 int playerMove(int y, int x, Player * user) {
-  if (mvinch(user -> position.y, user -> position.x) == '=') {
-    mvprintw(user -> position.y, user -> position.x, "=");
-  } else {
-    mvprintw(user -> position.y, user -> position.x, ".");
-  }
+  mvprintw(user -> position.y, user -> position.x, ".");
 
   user -> position.y = y;
   user -> position.x = x;
@@ -44,3 +40,15 @@ int playerStartPos(Room ** level, Player * user) {
   return 0;
 }
 
+
+int playerMoveStart(Player * user) {
+  int y = user -> startRoom -> position.y + 9;
+  int x = user -> startRoom -> position.x + 1;
+
+  playerMove(y, x, user);
+
+  mvprintw(0, 0, " ");
+  move(user -> position.y, user -> position.x);
+
+  return 0;
+}
