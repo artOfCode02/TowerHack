@@ -13,6 +13,6 @@ typedef struct Player {
 
 /* Function Declarations */
 Player * playerSetUp();
-int playerMove(int y, int x, Player * user);
+int playerMove(int y, int x, Player * user, bool onLadder);
 int playerStartPos(Room ** level, Player * user);
 int playerMoveStart(Player * user);

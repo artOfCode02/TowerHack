@@ -17,8 +17,12 @@ Player * playerSetUp() {
 }
 
 /* Move player */
-int playerMove(int y, int x, Player * user) {
-  mvprintw(user -> position.y, user -> position.x, ".");
+int playerMove(int y, int x, Player * user, bool onLadder) {
+  if (onLadder){
+    mvprintw(user -> position.y, user -> position.x, "=");
+  } else {
+    mvprintw(user -> position.y, user -> position.x, ".");
+  }
 
   user -> position.y = y;
   user -> position.x = x;
@@ -45,7 +49,7 @@ int playerMoveStart(Player * user) {
   int y = user -> startRoom -> position.y + 9;
   int x = user -> startRoom -> position.x + 1;
 
-  playerMove(y, x, user);
+  playerMove(y, x, user, 0);
 
   mvprintw(0, 0, " ");
   move(user -> position.y, user -> position.x);

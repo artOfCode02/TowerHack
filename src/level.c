@@ -11,7 +11,7 @@ int drawRoom(Room * room) {
   mvprintw(y, x, "|---------|");
 
   for(int i = 1; i < 10; i++) {
-    mvprintw(y + i, x, "|.........|");
+    mvprintw(y + i, x, "|...=.....|");
   }
 
   /*Bottom*/
