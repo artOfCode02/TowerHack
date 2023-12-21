@@ -33,7 +33,7 @@ int playerStartPos(Room ** level, Player * user) {
   srand(time(NULL));
 
   int roomNumber;
-  roomNumber = (rand() % 3) + 6;
+  roomNumber = (rand() % 3) + 5;
 
   user -> startRoom = level[roomNumber];
 
