@@ -17,16 +17,22 @@ Player * playerSetUp() {
 }
 
 /* Move player */
-int playerMove(int y, int x, Player * user, bool onLadder) {
-  if (onLadder){
+int playerMove(int y, int x, Player * user, bool toLadder) {
+  if ((user -> tile.tile) == '='){
     mvprintw(user -> position.y, user -> position.x, "=");
   } else {
     mvprintw(user -> position.y, user -> position.x, ".");
   }
 
+  if (toLadder){
+    user -> tile.tile = '=';
+  } else {
+    user -> tile.tile = '.';
+  }
+
   user -> position.y = y;
   user -> position.x = x;
-  
+
   mvprintw(user -> position.y, user -> position.x, "@");
   move(user -> position.y, user -> position.x);
   
