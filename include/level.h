@@ -8,6 +8,8 @@ typedef struct Room{
   Position door[2];
   Position trapdoor;
 
+  bool hasTrapdoor;
+
   //Monster ** monsters;
   //Item ** items;
   
@@ -15,6 +17,6 @@ typedef struct Room{
 
 
 int drawRoom(Room * roomArray);
-Room * createRoom(int y, int x, int doorLayout);
+Room * createRoom(int y, int x, bool hasTrapdoor, int doorLayout);
 Room ** mapSetUp();
 int trapdoorXPos(Room * room);
