@@ -85,33 +85,31 @@ int handleInput(char input, Player * user){
 
 /* Collision detection */
 int checkPosition(int newY, int newX, Player * user){
-  bool toLadder;
-  switch (mvinch(newY, newX)){
-    case '=':
-      toLadder = true;
+  char nextTile;
+  nextTile = mvinch(newY, newX);
 
+  switch (nextTile){
+    case '=':
       switch (user -> tile.tile) {
         case '=':
-          playerMove(newY, user -> position.x, user, toLadder);
+          playerMove(newY, user -> position.x, user, '=');
           break;
 
         case '.':
-          playerMove(user -> position.y, newX, user, toLadder);
+          playerMove(user -> position.y, newX, user, '=');
           break;
       }
       break;
     case '.':
-      toLadder = false;
-        
       switch (user -> tile.tile) {
         case '=':
           if (mvinch(newY + 1, newX) == '-'){
-            playerMove(user -> position.y, newX, user, toLadder);
+            playerMove(user -> position.y, newX, user, '.');
           }
           break;
 
         case '.':
-          playerMove(user -> position.y, newX, user, toLadder);
+          playerMove(user -> position.y, newX, user, '.');
           break;
 
         default:

@@ -17,18 +17,21 @@ Player * playerSetUp() {
 }
 
 /* Move player */
-int playerMove(int y, int x, Player * user, bool toLadder) {
-  if ((user -> tile.tile) == '='){
-    mvprintw(user -> position.y, user -> position.x, "=");
-  } else {
-    mvprintw(user -> position.y, user -> position.x, ".");
+int playerMove(int y, int x, Player * user, char nextTile) {
+  switch (user -> tile.tile) {
+    case '=':
+      mvprintw(user -> position.y, user -> position.x, "=");
+      break;
+
+    case '.':
+      mvprintw(user -> position.y, user -> position.x, ".");
+      break;
+    
+    default:
+      break;
   }
 
-  if (toLadder){
-    user -> tile.tile = '=';
-  } else {
-    user -> tile.tile = '.';
-  }
+  user -> tile.tile = nextTile;
 
   user -> position.y = y;
   user -> position.x = x;
@@ -52,10 +55,15 @@ int playerStartPos(Room ** level, Player * user) {
 
 
 int playerMoveStart(Player * user) {
-  int y = user -> startRoom -> position.y + 9;
-  int x = user -> startRoom -> position.x + 1;
+  srand(time(NULL));
 
-  playerMove(y, x, user, 0);
+  int rNum;
+  rNum = rand() % 9 + 1;
+
+  int y = user -> startRoom -> position.y + 9;
+  int x = user -> startRoom -> position.x + rNum;
+
+  playerMove(y, x, user, mvinch(y, x));
 
   mvprintw(0, 0, " ");
   move(user -> position.y, user -> position.x);
