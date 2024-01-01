@@ -81,12 +81,17 @@ int handleInput(char input, Player * user){
   }
   
   checkPosition(newY, newX, user);
+
+  return 0;
 }
 
 /* Collision detection */
 int checkPosition(int newY, int newX, Player * user){
   char nextTile;
   nextTile = mvinch(newY, newX);
+
+  char tileBelow;
+  tileBelow = mvinch(newY + 1, newX);
 
   switch (nextTile){
     case '=':
@@ -95,15 +100,43 @@ int checkPosition(int newY, int newX, Player * user){
           playerMove(newY, user -> position.x, user, '=');
           break;
 
+        case '+':
+          playerMove(newY, user -> position.x, user, '=');
+          break;
+
         case '.':
           playerMove(user -> position.y, newX, user, '=');
           break;
       }
       break;
+
+    case '+':
+      switch (user -> tile.tile) {
+        case '=':
+          if(tileBelow == '@'){
+            playerMove(newY, user -> position.x, user, '+');
+          } else {
+            playerMove(user -> position.y, newX, user, '+');
+          }
+          break;
+
+        case '.':
+          if(tileBelow == '='){
+            playerMove(newY, user -> position.x, user, '+');
+          } else {
+            playerMove(user -> position.y, newX, user, '+');
+          }
+          break;
+
+        default:
+          break;
+      }
+      break;
+
     case '.':
       switch (user -> tile.tile) {
         case '=':
-          if (mvinch(newY + 1, newX) == '-'){
+          if ((tileBelow == '-') || (tileBelow == '|')){
             playerMove(user -> position.y, newX, user, '.');
           }
           break;
@@ -111,6 +144,13 @@ int checkPosition(int newY, int newX, Player * user){
         case '.':
           playerMove(user -> position.y, newX, user, '.');
           break;
+
+        case '+':
+          if(tileBelow == '@') {
+            playerMove(newY, user -> position.x, user, '.');
+          } else {
+            playerMove(user -> position.y, newX, user, '.');
+          }
 
         default:
           break;
@@ -121,4 +161,6 @@ int checkPosition(int newY, int newX, Player * user){
   }
   
   move(user -> position.y, user -> position.x);
+
+  return 0;
 }

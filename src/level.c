@@ -84,10 +84,10 @@ int drawRoom(Room * room) {
   mvprintw(y + 10, x, "|---------|");
 
   for(int i = 0; i < 2; i++) {
-    mvprintw((room -> door[i].y), (room -> door[i].x), "-");
+    mvprintw((room -> door[i].y), (room -> door[i].x), "+");
   }
 
-  mvprintw((room -> trapdoor.y), (room -> trapdoor.x), "|");
+  mvprintw((room -> trapdoor.y), (room -> trapdoor.x), "+");
 
 
   return 0;
