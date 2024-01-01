@@ -26,7 +26,7 @@ int drawRoom(Room * room) {
 
   for(int i = 1; i < 10; i++) {
 		if(room -> hasTrapdoor){
-			switch(room -> trapdoor.x) {
+			switch(room -> trapdoor.position.x) {
 				case 1:
 				case 11:
 				case 21:
@@ -84,16 +84,17 @@ int drawRoom(Room * room) {
   mvprintw(y + 10, x, "|---------|");
 
   for(int i = 0; i < 2; i++) {
-    mvprintw((room -> door[i].y), (room -> door[i].x), "+");
+    mvprintw((room -> door[i].position.y), (room -> door[i].position.x), "+");
   }
 
-  mvprintw((room -> trapdoor.y), (room -> trapdoor.x), "+");
+  mvprintw((room -> trapdoor.position.y), (room -> trapdoor.position.x), "+");
 
 
   return 0;
 }
 
 Room * createRoom(int y, int x, bool hasTrapdoor,int doorLayout) {
+
   Room * newRoom;
   newRoom = malloc(sizeof(Room));
 
@@ -112,8 +113,9 @@ Room * createRoom(int y, int x, bool hasTrapdoor,int doorLayout) {
   trapdoorY = newRoom -> position.y;
 
   if(hasTrapdoor){
-    newRoom -> trapdoor.y = trapdoorY;
-    newRoom -> trapdoor.x = trapdoorXPos(newRoom);
+    newRoom -> trapdoor.position.y = trapdoorY;
+    newRoom -> trapdoor.position.x = trapdoorXPos(newRoom);
+    newRoom -> trapdoor.isOpen = false;
 
     newRoom -> hasTrapdoor = true;
   } else {
@@ -122,21 +124,25 @@ Room * createRoom(int y, int x, bool hasTrapdoor,int doorLayout) {
 
   switch(doorLayout) {
     case 1:
-      newRoom -> door[1].y = rightDoor.y;
-      newRoom -> door[1].x = rightDoor.x;
+      newRoom -> door[1].position.y = rightDoor.y;
+      newRoom -> door[1].position.x = rightDoor.x;
+      newRoom -> door[1].isOpen = false;
 
       break;
     case 11:
-      newRoom -> door[0].y = leftDoor.y;
-      newRoom -> door[0].x = leftDoor.x;
+      newRoom -> door[0].position.y = leftDoor.y;
+      newRoom -> door[0].position.x = leftDoor.x;
+      newRoom -> door[0].isOpen = false;
 
-      newRoom -> door[1].y = rightDoor.y;
-      newRoom -> door[1].x = rightDoor.x;
+      newRoom -> door[1].position.y = rightDoor.y;
+      newRoom -> door[1].position.x = rightDoor.x;
+      newRoom -> door[1].isOpen = false;
 
       break;
     case 10:
-      newRoom -> door[0].y = leftDoor.y;
-      newRoom -> door[0].x = leftDoor.x;
+      newRoom -> door[0].position.y = leftDoor.y;
+      newRoom -> door[0].position.x = leftDoor.x;
+      newRoom -> door[0].isOpen = false;
 
       break;
     default:

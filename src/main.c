@@ -113,7 +113,7 @@ int checkPosition(int newY, int newX, Player * user){
     case '+':
       switch (user -> tile.tile) {
         case '=':
-          if(tileBelow == '@'){
+          if((tileBelow == '@') || (tileBelow == '=')){
             playerMove(newY, user -> position.x, user, '+');
           } else {
             playerMove(user -> position.y, newX, user, '+');
@@ -136,7 +136,7 @@ int checkPosition(int newY, int newX, Player * user){
     case '.':
       switch (user -> tile.tile) {
         case '=':
-          if ((tileBelow == '-') || (tileBelow == '|')){
+          if (tileBelow != '.'){
             playerMove(user -> position.y, newX, user, '.');
           }
           break;

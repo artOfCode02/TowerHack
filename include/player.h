@@ -12,6 +12,8 @@ typedef struct Player {
   TILE_TYPE tile;
 
   Room * startRoom;
+
+  Room * currentRoom;
 } Player;
 
 /* Function Declarations */

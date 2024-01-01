@@ -68,6 +68,7 @@ int playerMoveStart(Player * user) {
   int x = user -> startRoom -> position.x + rNum;
 
   playerMove(y, x, user, mvinch(y, x));
+  user -> currentRoom = user -> startRoom;
 
   mvprintw(0, 0, " ");
   move(user -> position.y, user -> position.x);

@@ -1,12 +1,13 @@
 #pragma once
 
 #include "position.h"
+#include "door.h"
 
 typedef struct Room{
   Position position;
   
-  Position door[2];
-  Position trapdoor;
+  Door door[2];
+  Door trapdoor;
 
   bool hasTrapdoor;
 
