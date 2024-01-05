@@ -40,7 +40,7 @@ int playerMove(int y, int x, Player * user, char nextTile) {
   user -> position.y = y;
   user -> position.x = x;
 
-  mvprintw(user -> position.y, user -> position.x, "@");
+  mvprintw(y, x, "@");
   move(user -> position.y, user -> position.x);
   
   return 0;

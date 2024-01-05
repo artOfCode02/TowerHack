@@ -20,13 +20,13 @@ int trapdoorXPos(Room * room) {
 int drawRoom(Room * room) {
   int x = room -> position.x;
   int y = room -> position.y;
-  
+
   /*Top*/
   mvprintw(y, x, "|---------|");
 
-  for(int i = 1; i < 10; i++) {
-		if(room -> hasTrapdoor){
-			switch(room -> trapdoor.position.x) {
+  if(room -> hasTrapdoor){
+    for(int i = 1; i < 10; i++) {
+			switch(room -> trapdoor -> position.x) {
 				case 1:
 				case 11:
 				case 21:
@@ -75,25 +75,23 @@ int drawRoom(Room * room) {
 				default:
 					break;
 			}
-		} else {
-			mvprintw(y + i, x, "|.........|");
-		}
+    }
+      int trapdoorY = room -> trapdoor -> position.y;
+      int trapdoorX = room -> trapdoor -> position.x;
+
+      mvprintw(trapdoorY, trapdoorX, "+");
+  } else {
+    for(int i = 1; i < 10; i++)
+      mvprintw(y + i, x, "|.........|");
   }
 
   /*Bottom*/
   mvprintw(y + 10, x, "|---------|");
 
-  for(int i = 0; i < 2; i++) {
-    mvprintw((room -> door[i].position.y), (room -> door[i].position.x), "+");
-  }
-
-  mvprintw((room -> trapdoor.position.y), (room -> trapdoor.position.x), "+");
-
-
   return 0;
 }
 
-Room * createRoom(int y, int x, bool hasTrapdoor,int doorLayout) {
+Room * createRoom(int y, int x, bool hasTrapdoor) {
 
   Room * newRoom;
   newRoom = malloc(sizeof(Room));
@@ -101,53 +99,23 @@ Room * createRoom(int y, int x, bool hasTrapdoor,int doorLayout) {
   newRoom -> position.y = y;
   newRoom -> position.x = x;
 
-  Position leftDoor;
-  leftDoor.y = (newRoom -> position.y) + 9;
-  leftDoor.x = newRoom -> position.x;
-
-  Position rightDoor;
-  rightDoor.y = leftDoor.y;
-  rightDoor.x = leftDoor.x + 10;
-
   int trapdoorY;
   trapdoorY = newRoom -> position.y;
 
+  int trapdoorX;
+  trapdoorX = trapdoorXPos(newRoom);
+
   if(hasTrapdoor){
-    newRoom -> trapdoor.position.y = trapdoorY;
-    newRoom -> trapdoor.position.x = trapdoorXPos(newRoom);
-    newRoom -> trapdoor.isOpen = false;
+    newRoom -> trapdoor = createDoor(trapdoorY, trapdoorX);
+
+    newRoom -> trapdoor -> isOpen = false;
 
     newRoom -> hasTrapdoor = true;
   } else {
 		newRoom -> hasTrapdoor = false;
+    free(newRoom -> trapdoor);
 	}
 
-  switch(doorLayout) {
-    case 1:
-      newRoom -> door[1].position.y = rightDoor.y;
-      newRoom -> door[1].position.x = rightDoor.x;
-      newRoom -> door[1].isOpen = false;
-
-      break;
-    case 11:
-      newRoom -> door[0].position.y = leftDoor.y;
-      newRoom -> door[0].position.x = leftDoor.x;
-      newRoom -> door[0].isOpen = false;
-
-      newRoom -> door[1].position.y = rightDoor.y;
-      newRoom -> door[1].position.x = rightDoor.x;
-      newRoom -> door[1].isOpen = false;
-
-      break;
-    case 10:
-      newRoom -> door[0].position.y = leftDoor.y;
-      newRoom -> door[0].position.x = leftDoor.x;
-      newRoom -> door[0].isOpen = false;
-
-      break;
-    default:
-        break;
-  }
 
   drawRoom(newRoom);
 
@@ -171,46 +139,47 @@ Room ** mapSetUp() {
 
 
   //First row
-  level[0] = createRoom(1, 0, 0, 1);
-  level[1] = createRoom(1, 10, 0, 11);
-  level[2] = createRoom(1, 20, 0, 10);
+  level[0] = createRoom(1, 0, 0);
+  level[1] = createRoom(1, 10, 0);
+  level[2] = createRoom(1, 20, 0);
 
   switch(ladderRoomMiddle){
     case 0:
-      level[3] = createRoom(11, 0, 1, 1);
-      level[4] = createRoom(11, 10, 0, 11);
-      level[5] = createRoom(11, 20, 0, 10);
+      level[3] = createRoom(11, 0, 1);
+      level[4] = createRoom(11, 10, 0);
+      level[5] = createRoom(11, 20, 0);
 
 			break;
     case 1:
-      level[3] = createRoom(11, 0, 0, 1);
-      level[4] = createRoom(11, 10, 1, 11);
-      level[5] = createRoom(11, 20, 0, 10);
+      level[3] = createRoom(11, 0, 0);
+      level[4] = createRoom(11, 10, 1);
+      level[5] = createRoom(11, 20, 0);
 
 			break;
     case 2:
-      level[3] = createRoom(11, 0, 0, 1);
-      level[4] = createRoom(11, 10, 0, 11);
-      level[5] = createRoom(11, 20, 1, 10);
+      level[3] = createRoom(11, 0, 0);
+      level[4] = createRoom(11, 10, 0);
+      level[5] = createRoom(11, 20, 1);
+
   }
 
   switch(ladderRoomBottom){
     case 0:
-      level[6] = createRoom(21, 0, 1, 1);
-      level[7] = createRoom(21, 10, 0, 11);
-      level[8] = createRoom(21, 20, 0, 10);
+      level[6] = createRoom(21, 0, 1);
+      level[7] = createRoom(21, 10, 0);
+      level[8] = createRoom(21, 20, 0);
 
 			break;
     case 1:
-      level[6] = createRoom(21, 0, 0, 1);
-      level[7] = createRoom(21, 10, 1, 11);
-      level[8] = createRoom(21, 20, 0, 10);
+      level[6] = createRoom(21, 0, 0);
+      level[7] = createRoom(21, 10, 1);
+      level[8] = createRoom(21, 20, 0);
 
 			break;
     case 2:
-      level[6] = createRoom(21, 0, 0, 1);
-      level[7] = createRoom(21, 10, 0, 11);
-      level[8] = createRoom(21, 20, 1, 10);
+      level[6] = createRoom(21, 0, 0);
+      level[7] = createRoom(21, 10, 0);
+      level[8] = createRoom(21, 20, 1);
 
 			break;
   }
