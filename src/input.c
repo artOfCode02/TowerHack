@@ -47,28 +47,62 @@ int handleInput(char input, Player * user, Door ** doors, Door ** trapdoors){
       switch(ch){
         case 'h':
           isTrapdoor = false;
-          openDoor(user -> position.y, user -> position.x - 1, doors, isTrapdoor);
+          changeDoorState(user -> position.y, user -> position.x - 1, doors, isTrapdoor, true);
           break;
 
         case 'j':
           isTrapdoor = true;
-          openDoor(user -> position.y + 1, user -> position.x, trapdoors, isTrapdoor);
+          changeDoorState(user -> position.y + 1, user -> position.x, trapdoors, isTrapdoor, true);
           break;
 
         case 'k':
           isTrapdoor = true;
-          openDoor(user -> position.y - 1, user -> position.x, trapdoors, isTrapdoor);
+          changeDoorState(user -> position.y - 1, user -> position.x, trapdoors, isTrapdoor, true);
           break;
 
         case 'l':
           isTrapdoor = false;
-          openDoor(user -> position.y, user -> position.x + 1, doors, isTrapdoor);
+          changeDoorState(user -> position.y, user -> position.x + 1, doors, isTrapdoor, true);
           break;
 
         default:
           mvprintw(0, 0, "That is not a direction.");
           break;
       }
+
+      break;
+
+    case 'c':
+      mvprintw(0, 0, "Which direction.");
+      char c = getch();
+
+      switch(c){
+        case 'h':
+          isTrapdoor = false;
+          changeDoorState(user -> position.y, user -> position.x - 1, doors, isTrapdoor, false);
+          break;
+
+        case 'j':
+          isTrapdoor = true;
+          changeDoorState(user -> position.y + 1, user -> position.x, trapdoors, isTrapdoor, false);
+          break;
+
+        case 'k':
+          isTrapdoor = true;
+          changeDoorState(user -> position.y - 1, user -> position.x, trapdoors, isTrapdoor, false);
+          break;
+
+        case 'l':
+          isTrapdoor = false;
+          changeDoorState(user -> position.y, user -> position.x + 1, doors, isTrapdoor, false);
+          break;
+
+        default:
+          mvprintw(0, 0, "That is not a direction.");
+          break;
+      }
+
+      break;
 
     
     default:
@@ -109,7 +143,7 @@ int checkPosition(int newY, int newX, Player * user, Door * targetDoor){
           playerMove(newY, user -> position.x, user, '=');
           break;
 
-        case '+':
+        case '`':
           if((tileBelow == '=') || (tileBelow == '@')){
             playerMove(newY, user -> position.x, user, '=');
           } else {
@@ -124,28 +158,26 @@ int checkPosition(int newY, int newX, Player * user, Door * targetDoor){
       }
       break;
 
-    case '+':
-      if(targetDoor -> isOpen) {
-        switch (user -> tile.tile) {
-          case '=':
-            if((tileBelow == '@') || (tileBelow == '=')){
-              playerMove(newY, user -> position.x, user, '+');
-            } else {
-              playerMove(user -> position.y, newX, user, '+');
-            }
-            break;
+    case '`':
+      switch (user -> tile.tile) {
+        case '=':
+          if((tileBelow == '@') || (tileBelow == '=')){
+            playerMove(newY, user -> position.x, user, '`');
+          } else {
+            playerMove(user -> position.y, newX, user, '`');
+          }
+          break;
 
-          case '.':
-            if(tileBelow == '='){
-              playerMove(newY, user -> position.x, user, '+');
-            } else {
-              playerMove(user -> position.y, newX, user, '+');
-            }
-            break;
+        case '.':
+          if(tileBelow == '='){
+            playerMove(newY, user -> position.x, user, '`');
+          } else {
+            playerMove(user -> position.y, newX, user, '`');
+          }
+          break;
 
-          default:
-            break;
-        }
+        default:
+          break;
       }
       break;
 
@@ -161,7 +193,7 @@ int checkPosition(int newY, int newX, Player * user, Door * targetDoor){
           playerMove(user -> position.y, newX, user, '.');
           break;
 
-        case '+':
+        case '`':
           if(tileBelow == '@') {
             playerMove(newY, user -> position.x, user, '.');
           } else {
@@ -181,7 +213,7 @@ int checkPosition(int newY, int newX, Player * user, Door * targetDoor){
   return 0;
 }
 
-int openDoor(int y, int x, Door ** doors, bool isTrapdoor) {
+int changeDoorState(int y, int x, Door ** doors, bool isTrapdoor, bool openDoor) {
   Door * door;
   door = malloc(sizeof(Door));
 
@@ -192,8 +224,14 @@ int openDoor(int y, int x, Door ** doors, bool isTrapdoor) {
   if(door == NULL) {
     mvprintw(0, 0, "There is no door at that position.");
   } else {
-    door -> isOpen = true;
+    if(openDoor){
+      door -> isOpen = true;
+    } else {
+      door -> isOpen = false;
+    }
   }
+
+  drawDoor(door);
 
   return 0;
 }

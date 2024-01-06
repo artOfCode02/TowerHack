@@ -12,7 +12,7 @@ int drawDoor(Door * door) {
   x = door -> position.x;
 
   if(door -> isOpen) {
-    mvprintw(y, x, ":");
+    mvprintw(y, x, "`");
   } else {
     mvprintw(y, x, "+");
   }

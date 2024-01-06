@@ -23,8 +23,8 @@ int playerMove(int y, int x, Player * user, char nextTile) {
       mvprintw(user -> position.y, user -> position.x, "=");
       break;
 
-    case '+':
-      mvprintw(user -> position.y, user -> position.x, "+");
+    case '`':
+      mvprintw(user -> position.y, user -> position.x, "`");
       break;
 
     case '.':
@@ -40,7 +40,7 @@ int playerMove(int y, int x, Player * user, char nextTile) {
   user -> position.y = y;
   user -> position.x = x;
 
-  mvprintw(y, x, "@");
+  mvprintw(user -> position.y, user -> position.x, "@");
   move(user -> position.y, user -> position.x);
   
   return 0;
