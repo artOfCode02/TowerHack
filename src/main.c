@@ -26,12 +26,14 @@ int main(int argc, char * argv[]){
   user = playerSetUp();
   playerStartPos(level, user);
   playerMoveStart(user);
+  displayPlayerInfo(user);
 
   char ch = getch();
   
   /* Main Game Loop */
   while(ch != 'Q'){
     handleInput(ch, user, doors, map -> trapdoors);
+    displayPlayerInfo(user);
     ch = getch();
   }
   

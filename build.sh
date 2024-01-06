@@ -2,8 +2,8 @@
 rm *.o
 
 echo "Compiling..."
-gcc -c src/*.c -I include -g
-gcc *.o -o TowerHack -lncurses
+gcc -c src/*.c -I include -g -w
+gcc *.o -o TowerHack -lncurses -lm
 
 echo "Run program? (1/0)"
 read user
