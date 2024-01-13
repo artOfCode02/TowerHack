@@ -5,7 +5,7 @@
 #include "input.h"
 
 /* Turning input into action */
-int handleInput(char input, Player * user, Door ** doors, Door ** trapdoors){
+int handleInput(char input, Player * user, Door ** doors, Door ** trapdoors, Room ** level, Map * map){
   int newX;
   int newY;
 
@@ -122,13 +122,15 @@ int handleInput(char input, Player * user, Door ** doors, Door ** trapdoors){
   targetDoor = malloc(sizeof(Door));
   targetDoor = checkDoorPositionAgainstPosition(newY, newX, inputDoors, isTrapdoor);
   
-  checkPosition(newY, newX, user, targetDoor);
+  checkPosition(newY, newX, user, targetDoor, level, map, doors);
+
+  mvprintw(0, 0, "                ");
 
   return 0;
 }
 
 /* Collision detection */
-int checkPosition(int newY, int newX, Player * user, Door * targetDoor){
+int checkPosition(int newY, int newX, Player * user, Door * targetDoor, Room ** level, Map * map, Door ** doors){
   char nextTile;
   nextTile = mvinch(newY, newX);
 
@@ -204,6 +206,26 @@ int checkPosition(int newY, int newX, Player * user, Door * targetDoor){
           break;
       }
       break;
+
+    // case '^':
+    //   if(newY < user -> position.y) {
+    //     user -> towerLevel++;
+    //   } else {
+    //     user -> towerLevel--;
+    //   }
+    //
+    //   level = mapSetUp();
+    //   map = makeMap(level);
+    //   doors = makeLevelDoors();
+    //
+    //   playerStartPos(level, user);
+    //   playerMoveStart(user);
+    //   
+    //   if(user -> towerLevel != 1)
+    //     mvprintw(user -> position.y + 1, user -> position.x, "^");
+    //
+    //   break;
+    //   
     default:
       break;
   }
@@ -217,18 +239,12 @@ int changeDoorState(int y, int x, Door ** doors, bool isTrapdoor, bool openDoor)
   Door * door;
   door = malloc(sizeof(Door));
 
-  door = NULL;
-
   door = checkDoorPositionAgainstPosition(y, x, doors, isTrapdoor);
 
-  if(door == NULL) {
-    mvprintw(0, 0, "There is no door at that position.");
+  if(openDoor){
+    door -> isOpen = true;
   } else {
-    if(openDoor){
-      door -> isOpen = true;
-    } else {
-      door -> isOpen = false;
-    }
+    door -> isOpen = false;
   }
 
   drawDoor(door);

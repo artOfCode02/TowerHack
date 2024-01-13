@@ -22,6 +22,8 @@ Player * playerSetUp() {
   newPlayer -> mana = 20;
   newPlayer -> maxMana = 20;
 
+  newPlayer -> towerLevel = 1;
+
   return newPlayer;
 }
 
@@ -109,6 +111,9 @@ int displayPlayerInfo(Player * user) {
   mvprintw(yInfoBegin + 2, xInfoBegin, "MP:");
   displayBar(yInfoBegin+ 2, xInfoBegin + 4, MP, maxMP);
   displayStatNum(yInfoBegin + 2, xInfoBegin + 17, MP, maxMP);
+
+  mvprintw(yInfoBegin + 30, xInfoBegin, "LEVEL:");
+  mvprintw(yInfoBegin + 30, xInfoBegin + 8, "%d", user -> towerLevel);
   
   move(user -> position.y, user -> position.x);
 
@@ -177,9 +182,9 @@ int displayStatNum(int y, int x, int stat, int maxStat) {
 
 
 
-  mvprintw(y, x, stringStat);
+  mvprintw(y, x, "%s", stringStat);
   mvprintw(y, x + strlen(stringStat), "/");
-  mvprintw(y, x + strlen(stringStat) + 1, stringMaxStat);
+  mvprintw(y, x + strlen(stringStat) + 1, "%s", stringMaxStat);
 
   return 0;
 }

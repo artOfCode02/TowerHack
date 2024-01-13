@@ -8,6 +8,8 @@
 typedef struct Player {
   Position position;
 
+  int towerLevel;
+
   int health;
   int maxHealth;
 

@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <ncurses.h>
 
 #include "map.h"
@@ -9,8 +10,9 @@ Map * makeMap(Room ** rooms) {
   Map * newMap;
   newMap = malloc(sizeof(Map));
 
-  newMap -> trapdoors = malloc(sizeof(Door));
+  newMap -> trapdoors = malloc(sizeof(Door) * 2);
 
+  newMap -> rooms = malloc(sizeof(Room) * 9);
   newMap -> rooms = rooms;
 
   Door * trapdoorOne = malloc(sizeof(Door));
@@ -32,7 +34,31 @@ Map * makeMap(Room ** rooms) {
     }
   }
 
+  // srand(time(NULL));
+
+  // int endLevelX;
+  
+  // while ((endLevelX == 0 || endLevelX == 10) || endLevelX == 20) {
+    // endLevelX = rand() % 30;
+  // }
+
+  // newMap -> endLevel.y = 1;
+  // newMap -> endLevel.x = endLevelX;
+
+  // drawEndLadder(newMap);
+
   return newMap;
 }
 
-
+// int drawEndLadder(Map * map) {
+//   int y = map -> endLevel.y;
+//   int x = map -> endLevel.x;
+//
+//   mvprintw(y, x, "^");
+//
+//   for(int i = 1; i < 10; i++){
+//     mvprintw(y + i, x, "=");
+//   }
+//
+//   return 0;
+// }

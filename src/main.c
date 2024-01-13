@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "level.h"
 #include "map.h"
@@ -32,7 +33,7 @@ int main(int argc, char * argv[]){
   
   /* Main Game Loop */
   while(ch != 'Q'){
-    handleInput(ch, user, doors, map -> trapdoors);
+    handleInput(ch, user, doors, map -> trapdoors, level, map);
     displayPlayerInfo(user);
     ch = getch();
   }
@@ -49,4 +50,3 @@ int screenSetUp(){
   
   return 0;
 }
-

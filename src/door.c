@@ -48,7 +48,7 @@ Door ** makeLevelDoors() {
 }
 
 Door * checkDoorPositionAgainstPosition(int y, int x, Door ** doors, bool isTrapdoor) {
-  Door * door = NULL;
+  Door * door;
   door = malloc(sizeof(Door));
 
   int maxDoors;
@@ -64,9 +64,5 @@ Door * checkDoorPositionAgainstPosition(int y, int x, Door ** doors, bool isTrap
       door = doors[i];
   }
   
-  if(door == NULL) {
-    mvprintw(0, 0, "No door at that position.");
-  }
-
   return door;
 }
