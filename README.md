@@ -14,7 +14,7 @@ This rougelike is spell based, and it has vertical gameplay (no jumping though).
 To build you must:
 1. Clone this repo
 ```shell
-git clone https://github.com/artOfCode02/TowerHack/TowerHack.git/
+git clone https://github.com/artOfCode02/TowerHack.git/
 ```
 3. Go to the directory where you cloned to.
 ```shell
