@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "input.h"
+#include "message.h"
 
 /* Turning input into action */
 int handleInput(char input, Player * user, Door ** doors, Door ** trapdoors, Room ** level, Map * map){
@@ -66,7 +67,7 @@ int handleInput(char input, Player * user, Door ** doors, Door ** trapdoors, Roo
           break;
 
         default:
-          mvprintw(0, 0, "That is not a direction.");
+
           break;
       }
 
@@ -101,6 +102,12 @@ int handleInput(char input, Player * user, Door ** doors, Door ** trapdoors, Roo
           mvprintw(0, 0, "That is not a direction.");
           break;
       }
+      //clear top line
+      int y, x;
+      getyx(stdscr, y, x);
+      move(0, 0);
+      clrtoeol();
+      move(y, x);
 
       break;
 
@@ -207,25 +214,25 @@ int checkPosition(int newY, int newX, Player * user, Door * targetDoor, Room ** 
       }
       break;
 
-    // case '^':
-    //   if(newY < user -> position.y) {
-    //     user -> towerLevel++;
-    //   } else {
-    //     user -> towerLevel--;
-    //   }
-    //
-    //   level = mapSetUp();
-    //   map = makeMap(level);
-    //   doors = makeLevelDoors();
-    //
-    //   playerStartPos(level, user);
-    //   playerMoveStart(user);
-    //   
-    //   if(user -> towerLevel != 1)
-    //     mvprintw(user -> position.y + 1, user -> position.x, "^");
-    //
-    //   break;
-    //   
+     case '^':
+       if(newY < user -> position.y) {
+         user -> towerLevel++;
+       } else {
+         user -> towerLevel--;
+       }
+    
+       level = mapSetUp();
+       doors = makeLevelDoors();
+       map = makeMap(level);
+    
+       playerStartPos(level, user);
+       playerMoveStart(user);
+       
+       if(user -> towerLevel != 1)
+         mvprintw(user -> position.y + 1, user -> position.x, "^");
+    
+       break;
+       
     default:
       break;
   }

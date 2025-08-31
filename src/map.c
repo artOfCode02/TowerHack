@@ -34,31 +34,31 @@ Map * makeMap(Room ** rooms) {
     }
   }
 
-  // srand(time(NULL));
+  srand(time(NULL));
 
-  // int endLevelX;
+  int endLevelX;
   
-  // while ((endLevelX == 0 || endLevelX == 10) || endLevelX == 20) {
-    // endLevelX = rand() % 30;
-  // }
+  while ((endLevelX == 0 || endLevelX == 10) || endLevelX == 20) {
+    endLevelX = rand() % 30;
+  }
 
-  // newMap -> endLevel.y = 1;
-  // newMap -> endLevel.x = endLevelX;
+  newMap -> endLevel.y = 1;
+  newMap -> endLevel.x = endLevelX;
 
-  // drawEndLadder(newMap);
+  drawEndLadder(newMap);
 
   return newMap;
 }
 
-// int drawEndLadder(Map * map) {
-//   int y = map -> endLevel.y;
-//   int x = map -> endLevel.x;
-//
-//   mvprintw(y, x, "^");
-//
-//   for(int i = 1; i < 10; i++){
-//     mvprintw(y + i, x, "=");
-//   }
-//
-//   return 0;
-// }
+int drawEndLadder(Map * map) {
+  int y = map -> endLevel.y;
+  int x = map -> endLevel.x;
+
+  mvprintw(y, x, "^");
+
+  for(int i = 1; i < 10; i++){
+    mvprintw(y + i, x, "=");
+  }
+
+  return 0;
+}

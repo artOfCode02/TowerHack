@@ -8,8 +8,10 @@
 #include "player.h"
 #include "door.h"
 #include "input.h"
+#include "makeLevel.h"
 
 int screenSetUp();
+
 
 int main(int argc, char * argv[]){
   Player * user;
