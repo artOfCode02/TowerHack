@@ -36,9 +36,9 @@ Map * makeMap(Room ** rooms) {
 
   srand(time(NULL));
 
-  int endLevelX;
+  int endLevelX = 0;
   
-  while ((endLevelX == 0 || endLevelX == 10) || endLevelX == 20) {
+  while (endLevelX == 0 || endLevelX == 10 || endLevelX == 20) {
     endLevelX = rand() % 30;
   }
 

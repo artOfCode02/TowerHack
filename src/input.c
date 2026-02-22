@@ -7,11 +7,19 @@
 
 /* Turning input into action */
 int handleInput(char input, Player * user, Door ** doors, Door ** trapdoors, Room ** level, Map * map){
-  int newX;
-  int newY;
+  int newX = 0;
+  int newY = 0;
 
-  bool isTrapdoor;
+  bool isTrapdoor = false;
   
+  /* Input switch statement:
+  h = left
+  j = down
+  k = up
+  l = right
+  o = open door
+  c = close door
+  */
   switch(input){
     // Left
     case 'h':
@@ -41,6 +49,7 @@ int handleInput(char input, Player * user, Door ** doors, Door ** trapdoors, Roo
       isTrapdoor = false;
       break;
 
+    // Open door
     case 'o':
       mvprintw(0, 0, "Which direction.");
       char ch = getch();
@@ -139,10 +148,10 @@ int handleInput(char input, Player * user, Door ** doors, Door ** trapdoors, Roo
 /* Collision detection */
 int checkPosition(int newY, int newX, Player * user, Door * targetDoor, Room ** level, Map * map, Door ** doors){
   char nextTile;
-  nextTile = mvinch(newY, newX);
+  nextTile = (char)mvinch(newY, newX);
 
   char tileBelow;
-  tileBelow = mvinch(newY + 1, newX);
+  tileBelow = (char)mvinch(newY + 1, newX);
 
 
   switch (nextTile){

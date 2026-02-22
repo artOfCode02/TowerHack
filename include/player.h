@@ -4,7 +4,7 @@
 #include "position.h"
 #include "tile.h"
 
-/* Player "class" */
+/* Player struct */
 typedef struct Player {
   Position position;
 
@@ -26,12 +26,12 @@ typedef struct Player {
   Room * currentRoom;
 } Player;
 
-/* Function Declarations */
-Player * playerSetUp();
-int playerMove(int y, int x, Player * user, char nextTile);
-int playerStartPos(Room ** level, Player * user);
-int playerMoveStart(Player * user);
-Room * setPlayerRoom(int y, int x, Player * user);
-int displayPlayerInfo(Player * user);
+/* Function Declarations, details in player.c */
+Player *playerSetUp();
+int playerMove(int y, int x, Player *user, char nextTile);
+int playerStartPos(Room **level, Player *user);
+int playerMoveStart(Player *user);
+Room *setPlayerRoom(int y, int x, Player *user);
+int displayPlayerInfo(Player *user);
 int displayBar(int y, int x, int stat, int maxStat);
 int displayStatNum(int y, int x, int stat, int maxStat);
