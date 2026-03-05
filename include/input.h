@@ -8,6 +8,7 @@
 #include "player.h"
 #include "door.h"
 #include "map.h"
+#include "levelElements.h"
 
 /**
  * @brief Handle a single user input character and perform actions.
@@ -21,7 +22,7 @@
  * 
  * @return 0 on success.
  */
-int handleInput(char input, Player *user, Door **doors, Door **trapdoors, Room **level, Map *map);
+LevelElements handleInput(char input, LevelElements levelElements);
 
 /**
  * @brief Check the tile at a proposed position and handle collisions/movement.
@@ -34,9 +35,9 @@ int handleInput(char input, Player *user, Door **doors, Door **trapdoors, Room *
  * @param map        Current map information.
  * @param doors      Array of regular doors.
  * 
- * @return 0 on success.
+ * @return Updated map pointer if the level changes, otherwise the same map pointer, relayed to handleInput for state updates.
  */
-int checkPosition(int newY, int newX, Player *user, Door *targetDoor, Room **level, Map *map, Door **doors);
+LevelElements checkPosition(int newY, int newX, Door *targetDoor, LevelElements levelElements);
 
 /**
  * @brief Open or close a door at given coordinates.

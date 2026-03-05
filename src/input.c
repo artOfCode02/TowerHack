@@ -1,21 +1,27 @@
-#include <ncurses.h>
-#include <stdio.h>
-#include <stdlib.h>
+  #include <ncurses.h>
+  #include <stdio.h>
+  #include <stdlib.h>
 
-#include "input.h"
-#include "message.h"
-/**
- * @file input.c
- * @brief Handle player input, door interactions and collision detection.
- */
+  #include "input.h"
+  #include "message.h"
 
-/**
- * @copydoc handleInput
- */
-int handleInput(char input, Player *user, Door **doors, Door **trapdoors, Room **level, Map *map){
+  /**
+   * @file input.c
+   * @brief Handle player input, door interactions and collision detection.
+   */
+
+
+LevelElements handleInput(char input, LevelElements levelElements) {
+  Player *user = levelElements.user;
+  Map *map = levelElements.map;
+
   int newY = user->position.y;
   int newX = user->position.x;
   bool isTrapdoor = false;
+
+  Door **trapdoors = map -> trapdoors;
+  Door **doors = map -> doors;
+
 
   /* Direction offsets for movement */
   int offY = 0, offX = 0;
@@ -39,7 +45,7 @@ int handleInput(char input, Player *user, Door **doors, Door **trapdoors, Room *
         default:
           mvprintw(0, 0, "That is not a direction.");
           move(user->position.y, user->position.x);
-          return 0;
+          return levelElements;
       }
 
       int ty = user->position.y + offY;
@@ -50,12 +56,12 @@ int handleInput(char input, Player *user, Door **doors, Door **trapdoors, Room *
       // clear prompt and return
       mvprintw(0, 0, "                ");
       move(user->position.y, user->position.x);
-      return 0;
+      return levelElements;
     }
 
     default:
       // unsupported input -> no action
-      return 0;
+      return levelElements;
   }
 
   // For movement keys, compute target and resolve collision
@@ -72,22 +78,21 @@ int handleInput(char input, Player *user, Door **doors, Door **trapdoors, Room *
   Door **searchDoors = isTrapdoor ? trapdoors : doors;
   Door *targetDoor = fetchDoorFromDoorArrayUsingPosition(newY, newX, searchDoors, isTrapdoor);
 
-  checkPosition(newY, newX, user, targetDoor, level, map, doors);
+  levelElements = checkPosition(newY, newX, targetDoor, levelElements);
 
   // ensure cursor is on player
-  mvprintw(0, 0, "                ");
+  mvprintw(0, 0, "                                             ");
   move(user->position.y, user->position.x);
 
-  return 0;
+  return levelElements;
 }
 
-/**
- * @brief Check the tile at a proposed location and resolve movement/collisions.
- */
-/**
- * @copydoc checkPosition
- */
-int checkPosition(int newY, int newX, Player *user, Door *targetDoor, Room **level, Map *map, Door **doors){
+  /**
+   * @brief Check the tile at a proposed location and resolve movement/collisions.
+   */
+LevelElements checkPosition(int newY, int newX, Door *targetDoor, LevelElements levelElements) {
+  Player *user = levelElements.user;
+
   // Get the tile type of the target position
   char nextTile = (char)mvinch(newY, newX);
 
@@ -102,7 +107,7 @@ int checkPosition(int newY, int newX, Player *user, Door *targetDoor, Room **lev
   int currentX = user->position.x;
 
   /* Main switch statement to determine if the player can move to the target position,
-     based on the tile types and any doors present */
+      based on the tile types and any doors present */
   switch (nextTile){
 
     case '=':
@@ -166,40 +171,41 @@ int checkPosition(int newY, int newX, Player *user, Door *targetDoor, Room **lev
       }
       break;
 
-     case '^':
-       if (newY < user->position.y) {
-         user->towerLevel++;
-       } else {
-         user->towerLevel--;
-       }
+    case '^':
+      if (newY < user->position.y) {
+        user->towerLevel++;
+      } else {
+        user->towerLevel--;
+      }
+      
+      Room **level = mapSetUp();
+      Door **doors = makeLevelDoors();
+      Map *map = makeMap(level);
+      map -> doors = doors;
 
-       level = mapSetUp();
-       doors = makeLevelDoors();
-       map = makeMap(level);
+      playerStartPos(level, user);
+      playerMoveStart(user);
 
-       playerStartPos(level, user);
-       playerMoveStart(user);
+      levelElements.map = map;
 
-       if (user->towerLevel != 1)
-         mvprintw(user->position.y + 1, user->position.x, "^");
+      if (user->towerLevel != 1) mvprintw(user->position.y + 1, user->position.x, "^");
     
-       break;
-       
+      break;
+        
     default:
       break;
   }
-  
+
+  levelElements.user = user;
+
   move(user->position.y, user->position.x);
 
-  return 0;
+  return levelElements;
 }
 
-/**
- * @brief Open or close a door at the given coordinates.
- */
-/**
- * @copydoc changeDoorState
- */
+  /**
+   * @brief Open or close a door at the given coordinates.
+   */
 int changeDoorState(int y, int x, Door **doors, bool isTrapdoor, bool openDoor) {
   Door *door = fetchDoorFromDoorArrayUsingPosition(y, x, doors, isTrapdoor);
 

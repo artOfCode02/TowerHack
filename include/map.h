@@ -16,6 +16,10 @@
 typedef struct Map {
   /** Array of rooms forming the level */
   Room **rooms;
+
+  /** Array of all doors in the level */
+  Door **doors;
+
   /** Trapdoors found in the level */
   Door **trapdoors;
 

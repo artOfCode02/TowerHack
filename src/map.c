@@ -14,16 +14,14 @@
  * @brief Build a Map from the provided rooms and locate the end ladder.
  */
 Map *makeMap(Room **rooms) {
-  Map *newMap;
-  newMap = malloc(sizeof(Map));
+  Map *newMap = malloc(sizeof(Map));
 
-  newMap->trapdoors = malloc(sizeof(Door) * 2);
+  newMap -> rooms = malloc(sizeof(Room) * 9);
+  newMap -> rooms = rooms;
 
-  newMap->rooms = malloc(sizeof(Room) * 9);
-  newMap->rooms = rooms;
-
-  Door *trapdoorOne = malloc(sizeof(Door));
-  Door *trapdoorTwo = malloc(sizeof(Door));
+  newMap -> trapdoors = malloc(sizeof(Door) * 2);
+  Door *trapdoorOne   = malloc(sizeof(Door));
+  Door *trapdoorTwo   = malloc(sizeof(Door));
 
   for (int i = 3; i < 6; i++) {
     if(rooms[i] -> hasTrapdoor){
@@ -45,9 +43,8 @@ Map *makeMap(Room **rooms) {
 
   int endLevelX = 0;
   
-  while (endLevelX == 0 || endLevelX == 10 || endLevelX == 20) {
-    endLevelX = rand() % 30;
-  }
+  // Makes sure end ladderis not placed on top a level column '|' (x = 0, 10, or 20)
+  while (endLevelX == 0 || endLevelX == 10 || endLevelX == 20) endLevelX = rand() % 30;
 
   newMap -> endLevel.y = 1;
   newMap -> endLevel.x = endLevelX;

@@ -10,6 +10,8 @@
 #include "door.h"
 #include "input.h"
 #include "makeLevel.h"
+#include "levelElements.h"
+
 /**
  * @file main.c
  * @brief Program entry point, initialization and main game loop.
@@ -46,12 +48,19 @@ int main(int argc, char *argv[]){
   map = makeMap(level); // From map.c
 
   doors = makeLevelDoors(); // From door.c
+  map -> doors = doors; // Store doors in map for access in input handling
 
   // Player set up
   user = playerSetUp(); // From player.c
   playerStartPos(level, user); // From player.c
   playerMoveStart(user); // From player.c
   displayPlayerInfo(user); // From player.c
+
+  // Form a struct to hold level elements for easy passing to input handler
+  LevelElements levelElements = {
+    .user = user,
+    .map = map
+  };
 
   char ch = getch();
   
@@ -61,7 +70,7 @@ int main(int argc, char *argv[]){
     * reads new charachter and iterates the loop
   */
   while(ch != 'Q'){
-    handleInput(ch, user, doors, map -> trapdoors, level, map); // From input.c
+    levelElements = handleInput(ch, levelElements); // From input.c
     displayPlayerInfo(user); // From player.c
     ch = getch();
   }
