@@ -7,7 +7,8 @@ This project is a work-in-progress for now, so don't expect the game to even be 
 ## About
 
 TowerHack is a rougelike game where you climb the Cursed Tower to get the fabled Book of Gods.
-This rougelike is spell based, and it has vertical gameplay (no jumping though).
+This rougelike is spell based, and it has vertical gameplay (no jumping though).<br>
+OSX/macOS and Linux are supported, Windows version isn't supported.
 
 ## Build
 
@@ -39,14 +40,3 @@ To run program, while in TowerHack directory, run:
 ```shell
 ./build.sh
 ```
-
-## Contribute
-
-To contribute to this repository, you must:
-1. Fork this repo
-2. Make main branch
-3. Commit to main branch
-4. Open up a pull request and wait for changes to be accepted.
-
-## Closing
-Have fun developing (or playing)!
