@@ -4,6 +4,7 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "door.h", "door_8h.html", "door_8h" ],
     [ "input.h", "input_8h.html", "input_8h" ],
     [ "level.h", "level_8h.html", "level_8h" ],
+    [ "levelElements.h", "level_elements_8h.html", "level_elements_8h" ],
     [ "levelState.h", "level_state_8h.html", null ],
     [ "makeLevel.h", "make_level_8h.html", null ],
     [ "map.h", "map_8h.html", "map_8h" ],

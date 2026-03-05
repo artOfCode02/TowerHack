@@ -14,11 +14,7 @@
  * @brief Handle a single user input character and perform actions.
  * 
  * @param input     The input character.
- * @param user      Pointer to the player.
- * @param doors     Array of regular doors.
- * @param trapdoors Array of trapdoors.
- * @param level     Current level rooms.
- * @param map       Current map information.
+ * @param levelElements Struct containing pointers to player and map for state updates.
  * 
  * @return 0 on success.
  */
@@ -29,11 +25,8 @@ LevelElements handleInput(char input, LevelElements levelElements);
  * 
  * @param newY       Proposed Y coordinate.
  * @param newX       Proposed X coordinate.
- * @param user       Pointer to the player.
  * @param targetDoor Pointer to a door at the target position (if any).
- * @param level      Current level rooms.
- * @param map        Current map information.
- * @param doors      Array of regular doors.
+ * @param levelElements Struct containing pointers to player and map for state updates.
  * 
  * @return Updated map pointer if the level changes, otherwise the same map pointer, relayed to handleInput for state updates.
  */

@@ -177,10 +177,12 @@ LevelElements checkPosition(int newY, int newX, Door *targetDoor, LevelElements 
       } else {
         user->towerLevel--;
       }
+
+      
       
       Room **level = mapSetUp();
-      Door **doors = makeLevelDoors();
       Map *map = makeMap(level);
+      Door **doors = makeLevelDoors();
       map -> doors = doors;
 
       playerStartPos(level, user);
@@ -188,6 +190,7 @@ LevelElements checkPosition(int newY, int newX, Door *targetDoor, LevelElements 
 
       levelElements.map = map;
 
+      // Print '^' under '@' character to enter previous level
       if (user->towerLevel != 1) mvprintw(user->position.y + 1, user->position.x, "^");
     
       break;

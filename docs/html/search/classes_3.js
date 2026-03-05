@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['room_0',['Room',['../struct_room.html',1,'']]]
+  ['player_0',['Player',['../struct_player.html',1,'']]],
+  ['position_1',['Position',['../struct_position.html',1,'']]]
 ];

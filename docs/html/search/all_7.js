@@ -7,7 +7,7 @@ var searchData=
   ['makemap_4',['makeMap',['../map_8h.html#a0838640f07bc600f032c9221ba01f86b',1,'makeMap(Room **rooms):&#160;map.c'],['../map_8c.html#a0838640f07bc600f032c9221ba01f86b',1,'makeMap(Room **rooms):&#160;map.c']]],
   ['mana_5',['mana',['../struct_player.html#a9a64ebab916a7b25ecdec767ba111ca7',1,'Player']]],
   ['map_6',['Map',['../struct_map.html',1,'Map'],['../map_8h.html#a767ff9e0c58d27b070f30636b66d2603',1,'Map:&#160;map.h']]],
-  ['map_7',['map',['../main_8c.html#a7bdaf8655b48f0d7994eb54ec1da4981',1,'main.c']]],
+  ['map_7',['map',['../struct_level_elements.html#a875fdafe028a62b2c85ff4d68256f4e6',1,'LevelElements::map'],['../main_8c.html#a7bdaf8655b48f0d7994eb54ec1da4981',1,'map:&#160;main.c']]],
   ['map_2ec_8',['map.c',['../map_8c.html',1,'']]],
   ['map_2eh_9',['map.h',['../map_8h.html',1,'']]],
   ['mapsetup_10',['mapSetUp',['../level_8h.html#a14bf263a7066b55d3e9d68b51b42e142',1,'mapSetUp():&#160;level.c'],['../level_8c.html#a14bf263a7066b55d3e9d68b51b42e142',1,'mapSetUp():&#160;level.c']]],

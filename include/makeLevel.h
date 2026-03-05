@@ -5,6 +5,5 @@
  *
  * Placeholder header for any higher-level level construction utilities.
  */
-
 #pragma once
 

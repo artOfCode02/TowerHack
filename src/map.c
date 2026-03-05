@@ -43,7 +43,7 @@ Map *makeMap(Room **rooms) {
 
   int endLevelX = 0;
   
-  // Makes sure end ladderis not placed on top a level column '|' (x = 0, 10, or 20)
+  // Makes sure end ladder is not placed on top a level column '|' (x = 0, 10, or 20)
   while (endLevelX == 0 || endLevelX == 10 || endLevelX == 20) endLevelX = rand() % 30;
 
   newMap -> endLevel.y = 1;

@@ -39,10 +39,12 @@ int main(int argc, char *argv[]){
   // Register signal handlers
   signal(SIGINT, signal_handler); // Handles Ctrl + C
   signal(SIGTERM, signal_handler); // Handles termination signal
+  signal(SIGSEGV, signal_handler); // Handles segmentation violation
 
   // Set up ncurses
   screenSetUp();
 
+  // ----------------------------------------------
   level = mapSetUp(); // From level.c
 
   map = makeMap(level); // From map.c
@@ -61,6 +63,7 @@ int main(int argc, char *argv[]){
     .user = user,
     .map = map
   };
+  // --------------------------------------------
 
   char ch = getch();
   
@@ -72,6 +75,7 @@ int main(int argc, char *argv[]){
   while(ch != 'Q'){
     levelElements = handleInput(ch, levelElements); // From input.c
     displayPlayerInfo(user); // From player.c
+    refresh();
     ch = getch();
   }
 

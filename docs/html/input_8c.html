@@ -102,10 +102,10 @@ $(function(){initNavTree('input_8c.html','',''); });
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a04fa642222191bc5885c7343d13c09b0" id="r_a04fa642222191bc5885c7343d13c09b0"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a04fa642222191bc5885c7343d13c09b0">handleInput</a> (char input, <a class="el" href="struct_player.html">Player</a> *<a class="el" href="main_8c.html#af9430a1a5726f72faafbe2e1cdc3cd62">user</a>, <a class="el" href="struct_door.html">Door</a> **<a class="el" href="main_8c.html#ad9c88835b66369c1ef18f055baec814f">doors</a>, <a class="el" href="struct_door.html">Door</a> **trapdoors, <a class="el" href="struct_room.html">Room</a> **<a class="el" href="main_8c.html#a2d892f4330935edb8290585dfd84415d">level</a>, <a class="el" href="struct_map.html">Map</a> *<a class="el" href="main_8c.html#a7bdaf8655b48f0d7994eb54ec1da4981">map</a>)</td></tr>
-<tr class="memdesc:a04fa642222191bc5885c7343d13c09b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle a single user input character and perform actions.     <br /></td></tr>
-<tr class="memitem:a7fbc50d4f94acad0fe846e828f99ddd5" id="r_a7fbc50d4f94acad0fe846e828f99ddd5"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7fbc50d4f94acad0fe846e828f99ddd5">checkPosition</a> (int newY, int newX, <a class="el" href="struct_player.html">Player</a> *<a class="el" href="main_8c.html#af9430a1a5726f72faafbe2e1cdc3cd62">user</a>, <a class="el" href="struct_door.html">Door</a> *targetDoor, <a class="el" href="struct_room.html">Room</a> **<a class="el" href="main_8c.html#a2d892f4330935edb8290585dfd84415d">level</a>, <a class="el" href="struct_map.html">Map</a> *<a class="el" href="main_8c.html#a7bdaf8655b48f0d7994eb54ec1da4981">map</a>, <a class="el" href="struct_door.html">Door</a> **<a class="el" href="main_8c.html#ad9c88835b66369c1ef18f055baec814f">doors</a>)</td></tr>
-<tr class="memdesc:a7fbc50d4f94acad0fe846e828f99ddd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the tile at a proposed location and resolve movement/collisions.  <br /></td></tr>
+<tr class="memitem:a3da8ab66862e7d3874dfd4851324dbff" id="r_a3da8ab66862e7d3874dfd4851324dbff"><td class="memItemLeft"><a class="el" href="struct_level_elements.html">LevelElements</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3da8ab66862e7d3874dfd4851324dbff">handleInput</a> (char input, <a class="el" href="struct_level_elements.html">LevelElements</a> levelElements)</td></tr>
+<tr class="memdesc:a3da8ab66862e7d3874dfd4851324dbff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle a single user input character and perform actions.  <br /></td></tr>
+<tr class="memitem:ad1df100575ed544099ba652f59952819" id="r_ad1df100575ed544099ba652f59952819"><td class="memItemLeft"><a class="el" href="struct_level_elements.html">LevelElements</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad1df100575ed544099ba652f59952819">checkPosition</a> (int newY, int newX, <a class="el" href="struct_door.html">Door</a> *targetDoor, <a class="el" href="struct_level_elements.html">LevelElements</a> levelElements)</td></tr>
+<tr class="memdesc:ad1df100575ed544099ba652f59952819"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the tile at a proposed location and resolve movement/collisions.  <br /></td></tr>
 <tr class="memitem:af1891faa41270a83fe079ea8856e9a37" id="r_af1891faa41270a83fe079ea8856e9a37"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af1891faa41270a83fe079ea8856e9a37">changeDoorState</a> (int y, int x, <a class="el" href="struct_door.html">Door</a> **<a class="el" href="main_8c.html#ad9c88835b66369c1ef18f055baec814f">doors</a>, bool isTrapdoor, bool openDoor)</td></tr>
 <tr class="memdesc:af1891faa41270a83fe079ea8856e9a37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open or close a door at the given coordinates.  <br /></td></tr>
 </table>
@@ -147,31 +147,18 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Open or close a door at the given coordinates. </p>
-<p>Open or close a door at given coordinates.</p>
-<p>Open or close a door at given coordinates.   </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">y</td><td><a class="el" href="struct_door.html" title="Represents a door or trapdoor in a room.">Door</a> Y coordinate. </td></tr>
-    <tr><td class="paramname">x</td><td><a class="el" href="struct_door.html" title="Represents a door or trapdoor in a room.">Door</a> X coordinate. </td></tr>
-    <tr><td class="paramname"><a class="el" href="main_8c.html#ad9c88835b66369c1ef18f055baec814f">doors</a></td><td>Array of doors to search. </td></tr>
-    <tr><td class="paramname">isTrapdoor</td><td>True if the door array is trapdoors. </td></tr>
-    <tr><td class="paramname">openDoor</td><td>True to open the door, false to close.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success.</dd></dl>
-<p>Open or close a door at given coordinates.</p>
+<p>Open or close a door at given coordinates. </p>
 
 </div>
 </div>
-<a id="a7fbc50d4f94acad0fe846e828f99ddd5" name="a7fbc50d4f94acad0fe846e828f99ddd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fbc50d4f94acad0fe846e828f99ddd5">&#9670;&#160;</a></span>checkPosition()</h2>
+<a id="ad1df100575ed544099ba652f59952819" name="ad1df100575ed544099ba652f59952819"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1df100575ed544099ba652f59952819">&#9670;&#160;</a></span>checkPosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int checkPosition </td>
+          <td class="memname"><a class="el" href="struct_level_elements.html">LevelElements</a> checkPosition </td>
           <td>(</td>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>newY</em></span>, </td>
         </tr>
@@ -183,105 +170,49 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_player.html">Player</a> *</td>          <td class="paramname"><span class="paramname"><em>user</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="struct_door.html">Door</a> *</td>          <td class="paramname"><span class="paramname"><em>targetDoor</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_room.html">Room</a> **</td>          <td class="paramname"><span class="paramname"><em>level</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_map.html">Map</a> *</td>          <td class="paramname"><span class="paramname"><em>map</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_door.html">Door</a> **</td>          <td class="paramname"><span class="paramname"><em>doors</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="struct_level_elements.html">LevelElements</a></td>          <td class="paramname"><span class="paramname"><em>levelElements</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Check the tile at a proposed location and resolve movement/collisions. </p>
-<p>Check the tile at a proposed position and handle collisions/movement.</p>
-<p>Check the tile at a proposed position and handle collisions/movement.   </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">newY</td><td>Proposed Y coordinate. </td></tr>
-    <tr><td class="paramname">newX</td><td>Proposed X coordinate. </td></tr>
-    <tr><td class="paramname"><a class="el" href="main_8c.html#af9430a1a5726f72faafbe2e1cdc3cd62">user</a></td><td>Pointer to the player. </td></tr>
-    <tr><td class="paramname">targetDoor</td><td>Pointer to a door at the target position (if any). </td></tr>
-    <tr><td class="paramname"><a class="el" href="main_8c.html#a2d892f4330935edb8290585dfd84415d">level</a></td><td>Current level rooms. </td></tr>
-    <tr><td class="paramname"><a class="el" href="main_8c.html#a7bdaf8655b48f0d7994eb54ec1da4981">map</a></td><td>Current map information. </td></tr>
-    <tr><td class="paramname"><a class="el" href="main_8c.html#ad9c88835b66369c1ef18f055baec814f">doors</a></td><td>Array of regular doors.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success.</dd></dl>
-<p>Check the tile at a proposed position and handle collisions/movement.</p>
+<p>Check the tile at a proposed position and handle collisions/movement. </p>
 
 </div>
 </div>
-<a id="a04fa642222191bc5885c7343d13c09b0" name="a04fa642222191bc5885c7343d13c09b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04fa642222191bc5885c7343d13c09b0">&#9670;&#160;</a></span>handleInput()</h2>
+<a id="a3da8ab66862e7d3874dfd4851324dbff" name="a3da8ab66862e7d3874dfd4851324dbff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3da8ab66862e7d3874dfd4851324dbff">&#9670;&#160;</a></span>handleInput()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int handleInput </td>
+          <td class="memname"><a class="el" href="struct_level_elements.html">LevelElements</a> handleInput </td>
           <td>(</td>
           <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>input</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_player.html">Player</a> *</td>          <td class="paramname"><span class="paramname"><em>user</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_door.html">Door</a> **</td>          <td class="paramname"><span class="paramname"><em>doors</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_door.html">Door</a> **</td>          <td class="paramname"><span class="paramname"><em>trapdoors</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_room.html">Room</a> **</td>          <td class="paramname"><span class="paramname"><em>level</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_map.html">Map</a> *</td>          <td class="paramname"><span class="paramname"><em>map</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="struct_level_elements.html">LevelElements</a></td>          <td class="paramname"><span class="paramname"><em>levelElements</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Handle a single user input character and perform actions.    </p>
-<p>Handle a single user input character and perform actions.</p>
+<p>Handle a single user input character and perform actions. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">input</td><td>The input character. </td></tr>
-    <tr><td class="paramname"><a class="el" href="main_8c.html#af9430a1a5726f72faafbe2e1cdc3cd62">user</a></td><td>Pointer to the player. </td></tr>
-    <tr><td class="paramname"><a class="el" href="main_8c.html#ad9c88835b66369c1ef18f055baec814f">doors</a></td><td>Array of regular doors. </td></tr>
-    <tr><td class="paramname">trapdoors</td><td>Array of trapdoors. </td></tr>
-    <tr><td class="paramname"><a class="el" href="main_8c.html#a2d892f4330935edb8290585dfd84415d">level</a></td><td>Current level rooms. </td></tr>
-    <tr><td class="paramname"><a class="el" href="main_8c.html#a7bdaf8655b48f0d7994eb54ec1da4981">map</a></td><td>Current map information.</td></tr>
+    <tr><td class="paramname">levelElements</td><td>Struct containing pointers to player and map for state updates.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success.</dd></dl>
-<p>Handle a single user input character and perform actions.</p>
+<dl class="section return"><dt>Returns</dt><dd>0 on success. </dd></dl>
 
 </div>
 </div>

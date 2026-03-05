@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['player_0',['Player',['../player_8h.html#a480a040facb94f90060562cd65274385',1,'player.h']]],
-  ['position_1',['Position',['../position_8h.html#aa78012e27ba983f9620fe4ff4bf1d616',1,'position.h']]]
+  ['map_0',['Map',['../map_8h.html#a767ff9e0c58d27b070f30636b66d2603',1,'map.h']]],
+  ['message_1',['Message',['../message_8h.html#a82fffef6ac8d8a796ab35b7d6a7a0dcb',1,'message.h']]]
 ];
