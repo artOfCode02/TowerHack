@@ -5,18 +5,25 @@
 #include <ncurses.h>
 
 #include "map.h"
+/**
+ * @file map.c
+ * @brief Map construction and end-ladder drawing.
+ */
 
-Map * makeMap(Room ** rooms) {
-  Map * newMap;
+/**
+ * @brief Build a Map from the provided rooms and locate the end ladder.
+ */
+Map *makeMap(Room **rooms) {
+  Map *newMap;
   newMap = malloc(sizeof(Map));
 
-  newMap -> trapdoors = malloc(sizeof(Door) * 2);
+  newMap->trapdoors = malloc(sizeof(Door) * 2);
 
-  newMap -> rooms = malloc(sizeof(Room) * 9);
-  newMap -> rooms = rooms;
+  newMap->rooms = malloc(sizeof(Room) * 9);
+  newMap->rooms = rooms;
 
-  Door * trapdoorOne = malloc(sizeof(Door));
-  Door * trapdoorTwo = malloc(sizeof(Door));
+  Door *trapdoorOne = malloc(sizeof(Door));
+  Door *trapdoorTwo = malloc(sizeof(Door));
 
   for (int i = 3; i < 6; i++) {
     if(rooms[i] -> hasTrapdoor){
@@ -50,9 +57,12 @@ Map * makeMap(Room ** rooms) {
   return newMap;
 }
 
-int drawEndLadder(Map * map) {
-  int y = map -> endLevel.y;
-  int x = map -> endLevel.x;
+/**
+ * @brief Draw the end-level ladder at the map's end position.
+ */
+int drawEndLadder(Map *map) {
+  int y = map->endLevel.y;
+  int x = map->endLevel.x;
 
   mvprintw(y, x, "^");
 

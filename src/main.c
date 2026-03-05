@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <signal.h>
 
 #include "level.h"
 #include "map.h"
@@ -9,34 +10,37 @@
 #include "door.h"
 #include "input.h"
 #include "makeLevel.h"
+/**
+ * @file main.c
+ * @brief Program entry point, initialization and main game loop.
+ */
 
-/* DOCUMENTATION SECTION: 
-  Purpose: 
-    This file is responsible for initializing player, level, map, and doors. It contains the main game loop.
-
-  Functions:
-    * screenSetUp: Initializes the ncurses screen.
-    * mapSetUp: Initializes the level and returns a pointer to it, refer to level.c for more details.
-    * makeLevelDoors: Initializes the doors for the level and returns a pointer to them, refer to door.c for more details.
-    * playerSetUp: Initializes the player and returns a pointer to it, refer to player.c for more details.
-    * playerStartPos: Sets the player's starting position, refer to player.c for more details.
-    * playerMoveStart: Displays the player on the map, refer to player.c for more details.
-    * displayPlayerInfo: Displays the player's information, refer to player.c for more details.
-    * handleInput: Takes in user input and turns it into an action, refer to input.c for more details.
-*/
-
+// Variable initialization
+Player *user;
+Room **level;
+Door **doors;
+Map *map;
 
 int screenSetUp();
 
+void cleanup(void);
 
-int main(int argc, char * argv[]){
-  // Variable initialization
-  Player * user;
-  Room ** level;
-  Door ** doors;
-  Map * map;
+void signal_handler(int sig);
 
+int main(int argc, char *argv[]){
+  // Register cleanup function
+  if (atexit(cleanup) != 0) {
+    fprintf(stderr, "Failed to register atexit handler\n");
+    return EXIT_FAILURE;
+  }
+
+  // Register signal handlers
+  signal(SIGINT, signal_handler); // Handles Ctrl + C
+  signal(SIGTERM, signal_handler); // Handles termination signal
+
+  // Set up ncurses
   screenSetUp();
+
   level = mapSetUp(); // From level.c
 
   map = makeMap(level); // From map.c
@@ -61,18 +65,46 @@ int main(int argc, char * argv[]){
     displayPlayerInfo(user); // From player.c
     ch = getch();
   }
-  
-  // Ends ncurses
-  endwin();
+
 
   return 0;
 }
 
-// Initializes ncurses
+/**
+ * @brief Initialize ncurses screen settings.
+ * @return 0 on success.
+ */
 int screenSetUp(){
   initscr();
   noecho();
   refresh();
   
   return 0;
+}
+
+/**
+ * @brief Cleanup allocated resources and end ncurses mode.
+ */
+void cleanup(void) {
+  // Frees elements from memory
+  free(user);
+  free(level);
+  free(doors);
+  free(map);
+
+  // Ends ncurses
+  endwin();
+}
+
+/**
+ * @brief Signal handler that performs cleanup and re-raises the signal.
+ * @param sig Signal number received.
+ */
+void signal_handler(int sig) {
+  // Run cleanup function
+  cleanup();
+
+  // Re-raise signal for default handling
+  signal(sig, SIG_DFL);
+  raise(sig);
 }

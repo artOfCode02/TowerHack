@@ -6,25 +6,16 @@
 #include <string.h>
 
 #include "player.h"
-
-/* DOCUMENTATION SECTION:
-  Purpose: 
-    This file is responsible for the handling of the Player class, as well as the display stats for the player
-
-  Functions:
-    * playerSetUp: Sets up the player class and initializes default values for player stats
-    * playerMove: Moves player to a new location.
-    * playerStartPos: Randomizes which of the bottom 3 rooms the player's starting in
-    * playerMoveStart: Moves player to starting room
-    * displayPlayerInfo: Displays the player info to the right
-    * displayBar: Sets the display bar for the player stat
-*/
+/**
+ * @file player.c
+ * @brief Player initialization, movement and UI display helpers.
+ */
 
 
 /* Set up player */
-Player * playerSetUp() {
+Player *playerSetUp() {
   // Initializes new player and allocates space in memory for it
-  Player * newPlayer;
+  Player *newPlayer;
   newPlayer = malloc(sizeof(Player));
 
   // Sets default base and max player health
@@ -46,7 +37,7 @@ Player * playerSetUp() {
 }
 
 /* Move player */
-int playerMove(int y, int x, Player * user, char nextTile) {
+int playerMove(int y, int x, Player *user, char nextTile) {
 
   // Replace player '@' in old position with the tile type under
   switch (user -> tile.tile) {
@@ -83,7 +74,7 @@ int playerMove(int y, int x, Player * user, char nextTile) {
 }
 
 /* Sets the starting room the player will start in */
-int playerStartPos(Room ** level, Player * user) {
+int playerStartPos(Room **level, Player *user) {
   srand(time(NULL));
 
   int roomNumber = (rand() % 3) + 6; // Room numbers 6-8, bottom 3 rooms
@@ -94,7 +85,7 @@ int playerStartPos(Room ** level, Player * user) {
 }
 
 /* Moves the player to its initial position */
-int playerMoveStart(Player * user) {
+int playerMoveStart(Player *user) {
   srand(time(NULL));
 
   int rNum = (rand() % 9) + 1; // Random number 1-9
@@ -114,7 +105,7 @@ int playerMoveStart(Player * user) {
 }
 
 /* Displays player info */
-int displayPlayerInfo(Player * user) {
+int displayPlayerInfo(Player *user) {
   // Sets the position where the info will be displayed
   int yInfoBegin = 1;
   int xInfoBegin = 32;
@@ -216,9 +207,10 @@ int displayStatNum(int y, int x, int stat, int maxStat) {
   // Initializes stat array
   char displayStat[40];
 
-  // ^_^
+  // Formats the stat display as "stat / maxStat"
   snprintf(displayStat, sizeof(displayStat), "%d / %d", stat, maxStat);
 
+  // Prints displayStat at y and x
   mvprintw(y, x, "%s", displayStat);
 
   return 0;

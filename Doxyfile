@@ -1,0 +1,14 @@
+# Doxygen configuration for TowerHack
+PROJECT_NAME = "TowerHack"
+OUTPUT_DIRECTORY = docs
+GENERATE_HTML = YES
+GENERATE_LATEX = NO
+INPUT = include src
+RECURSIVE = YES
+QUIET = NO
+EXTRACT_ALL = YES
+FILE_PATTERNS = *.c *.h
+GENERATE_TREEVIEW = YES
+
+# Optional: exclude build artifacts if any
+EXCLUDE_PATTERNS = */.git/*

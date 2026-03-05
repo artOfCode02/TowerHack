@@ -5,84 +5,64 @@
 
 #include "level.h"
 
-int trapdoorXPos(Room * room) {
+/**
+ * @file level.c
+ * @brief Level and Room creation and drawing logic.
+ */
+
+/**
+ * @brief Outputs a random trapdoor x position.
+ */
+int trapdoorXPos(Room *room) {
+  // rand() initialization from current time
   struct timeval tv;
   gettimeofday(&tv, NULL);
-
   srand(tv.tv_usec);
 
-  int x;
-  x = (((rand() % 9) + 1) + (room -> position.x));
+  // Set x to a random number 1-9, plus the room's x position
+  int x = (((rand() % 9) + 1) + (room -> position.x));
 
   return x;
 }
 
-int drawRoom(Room * room) {
-  int x = room -> position.x;
+/**
+ * @brief Draws a room to the screen.
+ */
+int drawRoom(Room *room) {
+  // Sets y and x to room positions stored in the room struct
   int y = room -> position.y;
+  int x = room -> position.x;
 
   /*Top*/
   mvprintw(y, x, "|---------|");
 
+  // Condition to draw if the room has a trapdoor
   if(room -> hasTrapdoor){
-    for(int i = 1; i < 10; i++) {
-			switch(room -> trapdoor -> position.x) {
-				case 1:
-				case 11:
-				case 21:
-					mvprintw(y + i, x, "|=........|");
-					break;
-				case 2:
-				case 12:
-				case 22:
-					mvprintw(y + i, x, "|.=.......|");
-					break;
-				case 3:
-				case 13:
-				case 23:
-					mvprintw(y + i, x, "|..=......|");
-					break;
-				case 4:
-				case 14:
-				case 24:
-					mvprintw(y + i, x, "|...=.....|");
-					break;
-				case 5:
-				case 15:
-				case 25:
-					mvprintw(y + i, x, "|....=....|");
-					break;
-				case 6:
-				case 16:
-				case 26:
-					mvprintw(y + i, x, "|.....=...|");
-					break;
-				case 7:
-				case 17:
-				case 27:
-					mvprintw(y + i, x, "|......=..|");
-					break;
-				case 8:
-				case 18:
-				case 28:
-					mvprintw(y + i, x, "|.......=.|");
-					break;
-				case 9:
-				case 19:
-				case 29:
-					mvprintw(y + i, x, "|........=|");
-					break;
-				default:
-					break;
-			}
-    }
-      int trapdoorY = room -> trapdoor -> position.y;
-      int trapdoorX = room -> trapdoor -> position.x;
+    int trapdoorY = room -> trapdoor -> position.y;
+    int trapdoorX = room -> trapdoor -> position.x;
 
-      mvprintw(trapdoorY, trapdoorX, "+");
+    // Create a char array for room row with ladder
+    char trapdoorRoomRow[12];
+
+    // Create one room row
+    for (int i = 0; i < 11; i++) {
+      if (i == 0 || i == 10) { trapdoorRoomRow[i] = '|'; } // Left and right walls
+      else if (i == trapdoorX % 10) { trapdoorRoomRow[i] = '='; } // Ladder
+      else { trapdoorRoomRow[i] = '.'; } // Empty '.' space
+    }
+
+    // End char array with null terminator
+    trapdoorRoomRow[11] = '\0';
+
+    // Iterate loop to print room to screen
+    for (int i = 1; i < 10; i++) mvprintw(y + i, x, trapdoorRoomRow);
+
+    // Print a '+' charachter at the trapdoor location
+    mvprintw(trapdoorY, trapdoorX, "+");
+
+  // Condition to draw if the room has no trapdoor
   } else {
-    for(int i = 1; i < 10; i++)
-      mvprintw(y + i, x, "|.........|");
+    for(int i = 1; i < 10; i++) mvprintw(y + i, x, "|.........|");
   }
 
   /*Bottom*/
@@ -91,51 +71,57 @@ int drawRoom(Room * room) {
   return 0;
 }
 
-Room * createRoom(int y, int x, bool hasTrapdoor) {
-
-  Room * newRoom;
+/**
+ * @brief Creates a new room and draws it.
+ */
+Room *createRoom(int y, int x, bool hasTrapdoor) {
+  // Create and allocate room in memory
+  Room *newRoom;
   newRoom = malloc(sizeof(Room));
 
+  // Set room position
   newRoom -> position.y = y;
   newRoom -> position.x = x;
 
-  int trapdoorY;
-  trapdoorY = newRoom -> position.y;
-
-  int trapdoorX;
-  trapdoorX = trapdoorXPos(newRoom);
-
   if(hasTrapdoor){
+    // Set room trapdoor settings
+    int trapdoorY = newRoom -> position.y;
+    int trapdoorX = trapdoorXPos(newRoom);
+    
+    // Create the trapdoor (as it is technically a door)
     newRoom -> trapdoor = createDoor(trapdoorY, trapdoorX);
 
+    // Initialize the trapdoor to its closed state
     newRoom -> trapdoor -> isOpen = false;
 
     newRoom -> hasTrapdoor = true;
   } else {
 		newRoom -> hasTrapdoor = false;
+
+    // Free allocated trapdoor memory as it is unecessary
     free(newRoom -> trapdoor);
 	}
-
 
   drawRoom(newRoom);
 
   return newRoom;
 }
 
+/**
+ * @brief Create a level (array of 9 rooms).
+ */
+Room **mapSetUp() {
+  // Allocates a room array
+  Room **level = malloc(sizeof(Room) * 9);
 
-
-Room ** mapSetUp() {
-  Room ** level = malloc(sizeof(Room) * 9);
-
-  // struct timeval tv;
-  // gettimeofday(&tv, NULL);
+  // rand() setup
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
   srand(time(NULL));
 
-  int ladderRoomMiddle;
-  int ladderRoomBottom;
-
-  ladderRoomMiddle = rand() % 3;
-  ladderRoomBottom = rand() % 3;
+  // Initializes a random number 0-2 to determine which room has a ladder
+  int ladderRoomMiddle = rand() % 3;
+  int ladderRoomBottom = rand() % 3;
 
 
   //First row
@@ -143,46 +129,9 @@ Room ** mapSetUp() {
   level[1] = createRoom(1, 10, 0);
   level[2] = createRoom(1, 20, 0);
 
-  switch(ladderRoomMiddle){
-    case 0:
-      level[3] = createRoom(11, 0, 1);
-      level[4] = createRoom(11, 10, 0);
-      level[5] = createRoom(11, 20, 0);
-
-			break;
-    case 1:
-      level[3] = createRoom(11, 0, 0);
-      level[4] = createRoom(11, 10, 1);
-      level[5] = createRoom(11, 20, 0);
-
-			break;
-    case 2:
-      level[3] = createRoom(11, 0, 0);
-      level[4] = createRoom(11, 10, 0);
-      level[5] = createRoom(11, 20, 1);
-
-  }
-
-  switch(ladderRoomBottom){
-    case 0:
-      level[6] = createRoom(21, 0, 1);
-      level[7] = createRoom(21, 10, 0);
-      level[8] = createRoom(21, 20, 0);
-
-			break;
-    case 1:
-      level[6] = createRoom(21, 0, 0);
-      level[7] = createRoom(21, 10, 1);
-      level[8] = createRoom(21, 20, 0);
-
-			break;
-    case 2:
-      level[6] = createRoom(21, 0, 0);
-      level[7] = createRoom(21, 10, 0);
-      level[8] = createRoom(21, 20, 1);
-
-			break;
-  }
+  // For loops creates 3 rooms and assigns trapdoor status depending on if i == ladderRoomMiddle
+  for (int i = 0; i < 3; i++) level[i + 3] = createRoom(11, i * 10, i == ladderRoomMiddle ? true : false); // Middle rooms
+  for (int i = 0; i < 3; i++) level[i + 6] = createRoom(21, i * 10, i == ladderRoomBottom ? true : false); // Bottom rooms
  
   return level;
 }
